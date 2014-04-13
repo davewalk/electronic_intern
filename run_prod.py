@@ -1,3 +1,4 @@
 from app import app
 
-app.run(debug=False)
+def run():
+	app.run(debug=False)
