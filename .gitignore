@@ -1,0 +1,5 @@
+*.pyc
+intern.py
+.setenv
+notes.md
+*.sublime-*

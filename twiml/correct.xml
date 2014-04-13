@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Response>
+    <Gather action="/forward" method="GET" timeout="8">
+        <Say>That was an invalid digit. Please press four to be forwarded to Philly A-S-A-P</Say>
+    </Gather>
+    <Say>Why didn't you saying anything? Well, goodbye then.</Say>
+</Response>
