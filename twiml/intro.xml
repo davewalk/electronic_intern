@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Response>
     <Gather action="/forward" method="GET" timeout="8">
-        <Say>Hello, this is the Philly After School Activities Partnership calling to update your organizations' activities. Please provide this information by fax, by visiting this website or by pressing four now.</Say>
+        <Say>Hello, this is the Philly After School Activities Partnership calling to update your organizations' activities. Please provide this information by fax, by visiting this website or by pressing four now. Press one to repeat these instructions.</Say>
     </Gather>
     <Say>Why didn't you saying anything? Well, goodbye then.</Say>
 </Response>

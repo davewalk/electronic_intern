@@ -27,6 +27,11 @@ def forward():
         resp = make_response(resp_xml.render(forward_no=forward_no))
         resp.headers['Content-Type'] = 'application/xml'
         return resp
+    elif digit == '1':
+        resp_xml = env.get_template('repeat.xml')
+        resp = make_response(resp_xml.render())
+        resp.headers['Content-Type'] = 'application/xml'
+        return resp
     else:
         resp_xml = env.get_template('correct.xml')
         resp = make_response(resp_xml.render())
