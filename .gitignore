@@ -1,5 +1,5 @@
 *.pyc
-intern.py
 .setenv
 notes.md
 *.sublime-*
+call_lists/
