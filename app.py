@@ -7,7 +7,7 @@ env = Environment(autoescape=True,
                   loader=FileSystemLoader(os.path.join(
                     os.path.realpath(os.path.dirname(__file__)),
                     'twiml')))
-app.debug = True
+app.debug = False
 
 @app.route('/intro', methods=['GET', 'POST'])
 def intro():
