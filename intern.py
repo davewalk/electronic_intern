@@ -17,7 +17,11 @@ def log_results(client, results):
         est = timezone('US/Eastern')
         for result in results:
             call = client.calls.get(result)
-            if call.end_time:
+            while call.status == 'in-progress' or call.status == 'ringing':
+                print 'Call\'s still going on...'
+                time.sleep(30)
+                call = client.calls.get(result)
+            else:
                 start = parsedate(call.start_time)
                 start = datetime(*start[:6], microsecond=0)
                 start_est = est.localize(start)
@@ -32,11 +36,7 @@ def log_results(client, results):
                                  call.status,
                                  call.sid,
                                  round(float(call.price), 3)])
-            else:
-                print 'Call\'s still going on...'
-                time.sleep(45)
     return True
-
 
 def make_calls(csv_file):
     from_no = os.environ['INTERN_FROM']
