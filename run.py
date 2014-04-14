@@ -19,15 +19,15 @@ def intro():
 
 @app.route('/forward', methods=['GET'])
 def forward():
-    """Listen for a keypress of 4, if so, forward call to PhillyASAP office"""
+    """Listen for a keypress of 1, if so, forward call to PhillyASAP office"""
     digit = request.values.get('Digits', None)
-    if digit == '4':
+    if digit == '1':
         resp_xml = env.get_template('forward.xml')
         forward_no = os.environ['PHILLYASAP_FORWARD_NO']
         resp = make_response(resp_xml.render(forward_no=forward_no))
         resp.headers['Content-Type'] = 'application/xml'
         return resp
-    elif digit == '1':
+    elif digit == '4':
         resp_xml = env.get_template('repeat.xml')
         resp = make_response(resp_xml.render())
         resp.headers['Content-Type'] = 'application/xml'
