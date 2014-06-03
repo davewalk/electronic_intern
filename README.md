@@ -34,7 +34,7 @@ Make sure you have Python, and pip installed.
 Start the intern with:  
   `python run.py [numbers_to_call.csv]`  
 
-Your CSV file should have the phone numbers to call. The intern doesn't need headers!
+Your CSV file should have the phone numbers to call. You may want to put your call lists in the `/call_lists` folder because that seems like it would make sense. The intern doesn't need headers! 
 
 ### Install the intern's computer on Heroku
 
