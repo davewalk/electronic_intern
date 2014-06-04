@@ -4,12 +4,33 @@ from datetime import datetime
 from pytz import timezone
 
 def make_call(client, phone_no, from_no, callback_url):
+    """
+    Uses the Twilio API to make the call to the REST service
+
+    Args:
+        client: an instance of the TwilioRestClient
+        phone_no: the phone number to call
+        from_no: the phone number to call from (show's up in the
+            receiptent's call ID)
+        callback_url: the REST endpoint that the intern will make a call to
+
+    """
     call = client.calls.create(to=phone_no,
                                from_=from_no,
                                url=callback_url)
     return call.sid
 
 def log_results(client, results):
+    """
+    Logs the results of the intern's calls to a CSV file by calling Twilio's
+    API for details of each call made by the intern.
+
+    Args:
+        client: an instance of the TwilioRestClient
+        results: an array of IDs (SIDs) for the calls made by the intern
+            in this session
+
+    """
     with open('call_lists/results_' + str(int(time.time())) + '.csv', 'wb') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(['DATE', 'START_TIME', 'END_TIME', 'TO', \
@@ -39,6 +60,13 @@ def log_results(client, results):
     return True
 
 def make_calls(csv_file):
+    """
+    Iterates over the call list and makes a call for each phone number.
+
+    Args:
+        csv_file: A comma-separated file of phone numbers to call
+            in the first column
+    """
     from_no = os.environ['INTERN_FROM']
     callback_url = os.environ['INTERN_URL']
     account = os.environ['INTERN_ACCT']
