@@ -44,3 +44,8 @@ Your CSV file should have the phone numbers to call. You may want to put your ca
 3. Set the `PHILLYASAP_FORWARD_NO` to Heroku with:  
 `heroku config:set PHILLYASAP_FORWARD_NO`
 3. Try http:// [your Heroku app name].herokuapp.com/intro and confirm that you get XML back
+
+### Tests
+
+You care about testing, right? Run the tests with:  
+`python tests.py`
