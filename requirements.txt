@@ -6,6 +6,7 @@ argparse==1.2.1
 gunicorn==18.0
 httplib2==0.8
 itsdangerous==0.24
+requests==2.3.0
 six==1.6.1
 twilio==3.6.6
 wsgiref==0.1.2
