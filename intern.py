@@ -2,6 +2,34 @@ import os, sys, csv, time
 from email.utils import parsedate
 from datetime import datetime
 from pytz import timezone
+import logging
+from logging import handlers
+
+logger = logging.getLogger()
+# Change logging level here (CRITICAL, ERROR, WARNING, INFO or DEBUG)
+logger.setLevel(logging.DEBUG)
+
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+# Logging variables
+MAX_BYTES = 200000
+# Max number appended to log files when MAX_BYTES reached
+BACKUP_COUNT = 5
+log_file = 'log.txt'
+
+fh = logging.handlers.RotatingFileHandler(log_file,
+                                          'a',
+                                          MAX_BYTES,
+                                          BACKUP_COUNT)
+fh.setLevel(logging.DEBUG)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
+
+# Log to the console
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 def make_call(client, phone_no, from_no, callback_url):
     """
@@ -39,7 +67,7 @@ def log_results(client, results):
         for result in results:
             call = client.calls.get(result)
             while call.status == 'in-progress' or call.status == 'ringing':
-                print 'Call\'s still going on...'
+                logger.debug('Call\'s still going on...')
                 time.sleep(30)
                 call = client.calls.get(result)
             else:
@@ -80,17 +108,17 @@ def make_calls(csv_file):
 
     with open(csv_file, 'rb') as f:
         reader = csv.reader(f)
-        print 'Ok, intern\'s ready to make the calls...'
+        logger.info('Ok, intern\'s ready to make the calls...')
         for row in reader:
             call_sid = make_call(client, row[0], from_no, callback_url)
-            print 'The intern made a call to {0}:{1}'.format(row[0], call_sid)
+            logger.info('The intern made a call to {0}:{1}'.format(row[0], call_sid))
             call_results.append(call_sid)
             time.sleep(45)
 
-    print 'The intern is logging the calls results...'
+    logger.debug('The intern is logging the calls results...')
     intern_logging = log_results(client, call_results)
     if intern_logging:
-        print 'The electronic intern is done! Time to check Reddit.'
+        logger.info('The electronic intern is done! Time to check Reddit.')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
