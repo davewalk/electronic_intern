@@ -14,8 +14,10 @@ Yes, I know it doesn't make sense that the computer has its own computer but let
   * `INTERN_ACCT`: your Twilio AccountSID
   * `INTERN_TOKEN`: your Twilio Token
   * `INTERN_FROM`: The phone number your calls will come from without delimiters
+  * `INTERN_URL`: The URL that the server-side app is running from, for example, `http://[your Heroku app name].herokuapp.com`
   * `PHILLYASAP_FORWARD_NO`: PhillyASAP's phone number to forward calls to from within the app http:// [your Heroku app name].herokuapp.com/intro
-  * `INTERN_URL`: The URL that the server-side app is running from, for example, 
+  * `PHILLYASAP_TEST_ENV`: Either `prod` or something else. If it's prod it'll assume that the app to test is at the `INTERN_URL` endpoint. If it's something else, it'll test at `localhost:8000`
+  * `MP3_URL`: The URL of the audio file to play for the intro. Must be accessible on the internet. AWS' S3 is a good choice.
  
 ### Install the requirements
 
@@ -41,11 +43,15 @@ Your CSV file should have the phone numbers to call. You may want to put your ca
 1. Create a new app on Heroku
 2. Push the code to Heroku:  
 `git push heroku master`
-3. Set the `PHILLYASAP_FORWARD_NO` to Heroku with:  
-`heroku config:set PHILLYASAP_FORWARD_NO`
+3. Set the env vars that you'll need on Heroku with:  
+`heroku config:set PHILLYASAP_FORWARD_NO=XXXX` 
+
+    `heroku config:set MP3_URL=XXXX`
 3. Try http:// [your Heroku app name].herokuapp.com/intro and confirm that you get XML back
 
 ### Tests
 
 You care about testing, right? Run the tests with:  
 `python tests.py`
+
+Remember to set the `PHILLYASAP_TEST_ENV`

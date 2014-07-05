@@ -1,6 +1,7 @@
 export INTERN_ACCT=
 export INTERN_TOKEN=
-export INTERN_TO=
 export INTERN_FROM=
 export INTERN_URL=
 export PHILLYASAP_FORWARD_NO=
+export PHILLYASAP_TEST_ENV=
+export MP3_URL=
