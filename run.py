@@ -13,7 +13,8 @@ app.debug = False
 def intro():
     """Play the intro message."""
     resp_xml = env.get_template('intro.xml')
-    resp = make_response(resp_xml.render())
+    mp3_url = os.environ['MP3_URL']
+    resp = make_response(resp_xml.render(mp3_url=mp3_url))
     resp.headers['Content-Type'] = 'application/xml'
     return resp
 
