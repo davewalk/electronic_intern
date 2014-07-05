@@ -3,5 +3,4 @@
     <Gather action="/forward" method="GET" timeout="8">
         <Say>To update your information now or to learn more about "ASAP"’s Directory, press one to speak directory coordinator, Paul Carroll. Or to submit information for a new location, go online to w-w-w dot philly a-s-a-p dot org and follow the links to submit a new directory listing.</Say>
     </Gather>
-    <Say>Why didn't you saying anything? Well, goodbye then.</Say>
 </Response>

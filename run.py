@@ -1,5 +1,5 @@
 import os
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, redirect, url_for
 from jinja2 import Environment, FileSystemLoader
 
 app = Flask(__name__)
@@ -20,7 +20,12 @@ def intro():
 
 @app.route('/forward', methods=['GET'])
 def forward():
-    """Listen for a keypress of 1, if so, forward call to PhillyASAP office"""
+    """
+    Listen for a keypress:
+
+        - If 1, forward call to PhillyASAP office
+        - If 4, repeat the message.
+    """
     digit = request.values.get('Digits', None)
     if digit == '1':
         resp_xml = env.get_template('forward.xml')
@@ -29,10 +34,7 @@ def forward():
         resp.headers['Content-Type'] = 'application/xml'
         return resp
     elif digit == '4':
-        resp_xml = env.get_template('repeat.xml')
-        resp = make_response(resp_xml.render())
-        resp.headers['Content-Type'] = 'application/xml'
-        return resp
+        return redirect(url_for('intro'))
     else:
         resp_xml = env.get_template('correct.xml')
         resp = make_response(resp_xml.render())

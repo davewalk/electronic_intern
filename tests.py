@@ -6,7 +6,8 @@ class TestCase(unittest.TestCase):
         r = requests.get('http://localhost:8000/intro')
         root = ET.fromstring(r.content)
         assert root[0].tag == 'Gather'
-        assert root[0][0].tag == 'Say'
+        assert root[0][0].tag == 'Play'
+        assert root[0][0].text == os.environ['MP3_URL']
         assert root[0].attrib['action'] == '/forward'
         assert root[0].attrib['method'] == 'GET'
         assert r.headers['content-type'] == 'application/xml'
@@ -22,7 +23,7 @@ class TestCase(unittest.TestCase):
         r = requests.get('http://localhost:8000/forward?Digits=4')
         root = ET.fromstring(r.content)
         assert root[0].tag == 'Gather'
-        assert root[0][0].tag == 'Say'
+        assert root[0][0].tag == 'Play'
         assert root[0].attrib['action'] == '/forward'
         assert root[0].attrib['method'] == 'GET'
         assert r.headers['content-type'] == 'application/xml'
@@ -31,7 +32,7 @@ class TestCase(unittest.TestCase):
         r = requests.get('http://localhost:8000/forward?Digits=5')
         root = ET.fromstring(r.content)
         assert root[0].tag == 'Gather'
-        assert root[1].tag == 'Say'
+        assert root[0][0].tag == 'Say'
 
 if __name__ == '__main__':
     unittest.main()

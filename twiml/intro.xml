@@ -4,5 +4,4 @@
     	<Play>{{ mp3_url }}</Play>
         <Say>To repeat these instructions, press four.</Say>
     </Gather>
-    <Say>Why didn't you saying anything? Well, goodbye then.</Say>
 </Response>
