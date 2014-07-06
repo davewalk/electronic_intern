@@ -15,7 +15,7 @@ formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 MAX_BYTES = 200000
 # Max number appended to log files when MAX_BYTES reached
 BACKUP_COUNT = 5
-log_file = 'log.txt'
+log_file = sys.argv[2]
 
 fh = logging.handlers.RotatingFileHandler(log_file,
                                           'a',
@@ -125,7 +125,7 @@ def make_calls(csv_file):
                 logger.info('The electronic intern is done! Time to check Reddit.')
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print 'You forgot to give the intern a CSV of phone numbers!'
+    if len(sys.argv) < 3:
+        print 'You forgot to give the intern a CSV of phone numbers and a log file to write to!'
     else:
         make_calls(sys.argv[1])
