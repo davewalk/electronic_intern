@@ -5,3 +5,4 @@ export INTERN_URL=
 export PHILLYASAP_FORWARD_NO=
 export PHILLYASAP_TEST_ENV=
 export MP3_URL=
+export CALL_DELAY=

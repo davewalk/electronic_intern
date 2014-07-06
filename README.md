@@ -18,6 +18,7 @@ Yes, I know it doesn't make sense that the computer has its own computer but let
   * `PHILLYASAP_FORWARD_NO`: PhillyASAP's phone number to forward calls to from within the app http:// [your Heroku app name].herokuapp.com/intro
   * `PHILLYASAP_TEST_ENV`: Either `prod` or something else. If it's prod it'll assume that the app to test is at the `INTERN_URL` endpoint. If it's something else, it'll test at `localhost:8000`
   * `MP3_URL`: The URL of the audio file to play for the intro. Must be accessible on the internet. AWS' S3 is a good choice.
+  * `CALL_DELAY`: Time between calls by the intern (in seconds)
  
 ### Install the requirements
 
