@@ -83,8 +83,7 @@ def log_results(client, results):
                                  call.to[2:],
                                  call.duration,
                                  call.status,
-                                 call.sid,
-                                 round(float(call.price), 3)])
+                                 call.sid])
     return True
 
 def make_calls(csv_file):
