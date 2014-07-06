@@ -99,7 +99,7 @@ def make_calls(csv_file):
     callback_url = os.environ['INTERN_URL'] + '/intro'
     account = os.environ['INTERN_ACCT']
     token = os.environ['INTERN_TOKEN']
-    call_delay = os.environ['CALL_DELAY']
+    call_delay = int(os.environ['CALL_DELAY'])
 
     from twilio.rest import TwilioRestClient
 
@@ -114,6 +114,7 @@ def make_calls(csv_file):
             call_sid = make_call(client, row[0], from_no, callback_url)
             logger.info('The intern made a call to {0}:{1}'.format(row[0], call_sid))
             call_results.append(call_sid)
+            logger.debug('Waiting for ' + str(call_delay / 60) + ' minutes before the next call...')
             time.sleep(call_delay)
 
     logger.debug('The intern is logging the calls results...')
