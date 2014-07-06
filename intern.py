@@ -110,17 +110,20 @@ def make_calls(csv_file):
     with open(csv_file, 'rb') as f:
         reader = csv.reader(f)
         logger.info('Ok, intern\'s ready to make the calls...')
-        for row in reader:
-            call_sid = make_call(client, row[0], from_no, callback_url)
-            logger.info('The intern made a call to {0}:{1}'.format(row[0], call_sid))
-            call_results.append(call_sid)
-            logger.debug('Waiting for ' + str(call_delay / 60) + ' minutes before the next call...')
-            time.sleep(call_delay)
-
-    logger.debug('The intern is logging the calls results...')
-    intern_logging = log_results(client, call_results)
-    if intern_logging:
-        logger.info('The electronic intern is done! Time to check Reddit.')
+        try:
+            for row in reader:
+                call_sid = make_call(client, row[0], from_no, callback_url)
+                logger.info('The intern made a call to {0}:{1}'.format(row[0], call_sid))
+                call_results.append(call_sid)
+                logger.debug('Waiting for ' + str(call_delay / 60) + ' minutes before the next call...')
+                time.sleep(call_delay)
+        except Exception as err:
+            logger.error(err)
+        finally:
+            logger.debug('The intern is logging the calls results...')
+            intern_logging = log_results(client, call_results)
+            if intern_logging:
+                logger.info('The electronic intern is done! Time to check Reddit.')
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
