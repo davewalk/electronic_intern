@@ -96,7 +96,7 @@ def make_calls(csv_file):
             in the first column
     """
     from_no = os.environ['INTERN_FROM']
-    callback_url = os.environ['INTERN_URL']
+    callback_url = os.environ['INTERN_URL'] + '/intro'
     account = os.environ['INTERN_ACCT']
     token = os.environ['INTERN_TOKEN']
 
