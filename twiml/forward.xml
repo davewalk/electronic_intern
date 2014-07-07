@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Response>
-    <Say>Thank you. I will connect you to Philly ASAP now.</Say>
+    <Say>Thank you. I will connect you to Philly ASAP now. When connected, press one one to reach Paul Carroll.</Say>
     <Dial>{{ forward_no }}</Dial>
 </Response>
