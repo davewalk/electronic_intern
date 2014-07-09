@@ -26,6 +26,7 @@ Make sure you have Python, and pip installed.
 
 1. Install the Python requirements:  
     `pip install -r requirements.txt`. (You'll probably want to do this in a [virtualenv](http://www.dabapps.com/blog/introduction-to-pip-and-virtualenv-python))
+2. Install [MongoDB](http://www.mongodb.org/downloads) and make sure it's running
 
 ### Run the intern's computer locally
 1. Do this:  `python run.py`
@@ -46,9 +47,11 @@ Your CSV file should have the phone numbers to call. You may want to put your ca
 `git push heroku master`
 3. Set the env vars that you'll need on Heroku with:  
 `heroku config:set PHILLYASAP_FORWARD_NO=XXXX` 
+4. Install the free MongoHQ add-on:  
+`heroku addons:add mongohq`
 
     `heroku config:set MP3_URL=XXXX`
-3. Try http:// [your Heroku app name].herokuapp.com/intro and confirm that you get XML back
+5. Try http:// [your Heroku app name].herokuapp.com/intro and confirm that you get XML back
 
 ### Tests
 
