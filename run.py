@@ -49,7 +49,7 @@ def forward():
     if digit == '1':
         resp_xml = env.get_template('forward.xml')
         forward_no = os.environ['PHILLYASAP_FORWARD_NO']
-        resp = make_response(resp_xmlrrender(forward_no=forward_no))
+        resp = make_response(resp_xml.rrender(forward_no=forward_no))
         resp.headers['Content-Type'] = 'application/xml'
         return resp
     elif digit == '4':
