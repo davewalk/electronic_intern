@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Response>
-    <Gather action="/forward" method="GET" timeout="8">
+    <Gather action="/forward" method="GET" timeout="15" numDigits="1">
         <Say>That was an invalid digit. Please press one to be forwarded to Philly ASAP or four to hear the message again.</Say>
     </Gather>
 </Response>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Response>
-    <Gather action="/forward" method="GET" timeout="8">
+    <Gather action="/forward" method="GET" timeout="15" numDigits="1">
     	<Play>{{ mp3_url }}</Play>
         <Say>To repeat these instructions, press four.</Say>
     </Gather>
