@@ -19,7 +19,7 @@ env = Environment(autoescape=True,
                   loader=FileSystemLoader(os.path.join(
                     os.path.realpath(os.path.dirname(__file__)),
                     'twiml')))
-app.debug = False
+app.debug = True
 
 @app.route('/intro', methods=['GET', 'POST'])
 def intro():
@@ -50,7 +50,7 @@ def forward():
     if digit == '1':
         resp_xml = env.get_template('forward.xml')
         forward_no = os.environ['PHILLYASAP_FORWARD_NO']
-        resp = make_response(resp_xml.rrender(forward_no=forward_no))
+        resp = make_response(resp_xml.render(forward_no=forward_no))
         resp.headers['Content-Type'] = 'application/xml'
         return resp
     elif digit == '4':
