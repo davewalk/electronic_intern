@@ -48,44 +48,6 @@ def make_call(client, phone_no, from_no, callback_url):
                                url=callback_url)
     return call.sid
 
-def log_results(client, results):
-    """
-    Logs the results of the intern's calls to a CSV file by calling Twilio's
-    API for details of each call made by the intern.
-
-    Args:
-        client: an instance of the TwilioRestClient
-        results: an array of IDs (SIDs) for the calls made by the intern
-            in this session
-
-    """
-    with open('call_lists/results_' + str(int(time.time())) + '.csv', 'wb') as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(['DATE', 'START_TIME', 'END_TIME', 'TO', \
-                         'DURATION (SEC)', 'RESULT', 'SID', 'COST (CENTS)'])
-        est = timezone('US/Eastern')
-        for result in results:
-            call = client.calls.get(result)
-            while call.status == 'in-progress' or call.status == 'ringing':
-                logger.debug('Call\'s still going on...')
-                time.sleep(30)
-                call = client.calls.get(result)
-            else:
-                start = parsedate(call.start_time)
-                start = datetime(*start[:6], microsecond=0)
-                start_est = est.localize(start)
-                end = parsedate(call.end_time)
-                end = datetime(*end[:6], microsecond=0)
-                end_est = est.localize(end)
-                writer.writerow([start_est.strftime('%m/%d/%y'),
-                                 start_est.strftime('%H:%M %p'),
-                                 end_est.strftime('%m/%d/%y'),
-                                 call.to[2:],
-                                 call.duration,
-                                 call.status,
-                                 call.sid])
-    return True
-
 def make_calls(csv_file):
     """
     Iterates over the call list and makes a call for each phone number.
@@ -104,8 +66,6 @@ def make_calls(csv_file):
 
     client = TwilioRestClient(account, token)
 
-    call_results = []
-
     with open(csv_file, 'rb') as f:
         reader = csv.reader(f)
         logger.info('Ok, intern\'s ready to make the calls...')
@@ -113,16 +73,12 @@ def make_calls(csv_file):
             for row in reader:
                 call_sid = make_call(client, row[0], from_no, callback_url)
                 logger.info('The intern made a call to {0}:{1}'.format(row[0], call_sid))
-                call_results.append(call_sid)
                 logger.debug('Waiting for ' + str(call_delay / 60) + ' minutes before the next call...')
                 time.sleep(call_delay)
         except Exception as err:
             logger.error(err)
         finally:
-            logger.debug('The intern is logging the calls results...')
-            intern_logging = log_results(client, call_results)
-            if intern_logging:
-                logger.info('The electronic intern is done! Time to check Reddit.')
+            logger.info('The electronic intern is done! Time to check Reddit.')
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
