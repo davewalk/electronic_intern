@@ -3,6 +3,7 @@ from flask import Flask, make_response, request, redirect, url_for
 from jinja2 import Environment, FileSystemLoader
 import pymongo
 from datetime import datetime
+from urlparse import urlparse
 
 MONGO_URL = os.environ.get('MONGOHQ_URL')
 
