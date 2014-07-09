@@ -25,6 +25,7 @@ app.debug = False
 def intro():
     """Play the intro message."""
 
+    to = request.values.get('To', None)
     db.responses.insert({"to": to, "what": "response", "date": datetime.now()})
 
     resp_xml = env.get_template('intro.xml')
