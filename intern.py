@@ -69,16 +69,16 @@ def make_calls(csv_file):
     with open(csv_file, 'rb') as f:
         reader = csv.reader(f)
         logger.info('Ok, intern\'s ready to make the calls...')
-        try:
-            for row in reader:
+        for row in reader:
+            try:
                 call_sid = make_call(client, row[0], from_no, callback_url)
                 logger.info('The intern made a call to {0}:{1}'.format(row[0], call_sid))
-                logger.debug('Waiting for ' + str(call_delay / 60) + ' minutes before the next call...')
-                time.sleep(call_delay)
-        except Exception as err:
-            logger.error(err)
-        finally:
-            logger.info('The electronic intern is done! Time to check Reddit.')
+            except Exception as err:
+                logger.error(err)
+                logger.info('Continuing...')
+            logger.debug('Waiting for ' + str(call_delay / 60) + ' minutes before the next call...')
+            time.sleep(call_delay)
+        logger.info('The electronic intern is done! Time to check Reddit.')
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
