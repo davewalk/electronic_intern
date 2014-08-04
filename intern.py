@@ -45,7 +45,8 @@ def make_call(client, phone_no, from_no, callback_url):
     """
     call = client.calls.create(to=phone_no,
                                from_=from_no,
-                               url=callback_url)
+                               url=callback_url,
+                               record=True)
     return call.sid
 
 def make_calls(csv_file):
